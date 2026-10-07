@@ -1,0 +1,14 @@
+# Archivos de compilación Maven
+target/
+
+# IDEs
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+
+# Archivos de SO
+.DS_Store
+Thumbs.db
