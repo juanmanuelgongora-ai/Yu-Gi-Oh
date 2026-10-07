@@ -1,7 +1,7 @@
 package com.yugioh.duellite;
 
 /**
- * Punto de entrada principal para la aplicación Yu-Gi-Oh! Duel Lite.
+ * Punto de entrada principal para la aplicación Yu-Gi-Oh!.
  */
 public class Main {
     public static void main(String[] args) {

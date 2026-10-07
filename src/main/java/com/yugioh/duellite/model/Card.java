@@ -2,7 +2,6 @@ package com.yugioh.duellite.model;
 
 /**
  * Representa una carta del juego Yu-Gi-Oh! obtenida desde la API YGOProDeck.
- * Diseñada para ser utilizada por el motor del juego y la interfaz gráfica.
  */
 public class Card {
     private final int id;
