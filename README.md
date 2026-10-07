@@ -3,15 +3,19 @@
 Mini-aplicación de escritorio desarrollada en **Java Swing** que simula un duelo sencillo de cartas entre un Jugador y la Máquina, consumiendo en tiempo real la API pública de **YGOProDeck**.
 
 ---
+## 📌 Integrantes
+* ** Juan Manuel Góngora Góngora - 2357650
+* ** Juan Manuel Pérez - 2266033
 
-## 📌 Información del Laboratorio
+
+## Información del Laboratorio
 * **Programa:** Tecnología en Sistemas.
 * **Materia:** Desarrollo de Software III.
 * **Docente:** Mg(c). Juan Pablo Pinillos Reina.
 
 ---
 
-## 🚀 Requisitos y Tecnologías
+## Requisitos y Tecnologías
 * **Lenguaje:** Java 11 o superior.
 * **Interfaz Gráfica:** Swing.
 * **Cliente HTTP y Parsing JSON:** `java.net.http.HttpClient` + `org.json`.
@@ -19,7 +23,7 @@ Mini-aplicación de escritorio desarrollada en **Java Swing** que simula un duel
 
 ---
 
-## 🎯 Características e Integración
+## Características e Integración
 1. **Consumo de API REST:** Consulta `randomcard.php` garantizando que solo se carguen 3 cartas de tipo **Monster** por participante.
 2. **Desacoplamiento Lógica/UI:** La clase `Duel` no conoce a Swing. Se comunica mediante la interfaz `BattleListener` (`onTurn`, `onScoreChanged`, `onDuelEnded`).
 3. **Manejo de Hilos (No Bloqueante):** Uso de `SwingWorker` en la carga de cartas e imágenes web para no congelar el hilo principal de la UI (`EDT`).
@@ -27,7 +31,7 @@ Mini-aplicación de escritorio desarrollada en **Java Swing** que simula un duel
 
 ---
 
-## 🛠️ Instrucciones de Ejecución
+## Instrucciones de Ejecución
 
 ### Opción 1: Desde la Consola / Terminal
 ```bash
@@ -44,7 +48,7 @@ mvn exec:java -Dexec.mainClass="com.yugioh.duellite.Main"
 
 ---
 
-## 🏗️ Breve Explicación de Diseño (Arquitectura POO)
+## Breve Explicación de Diseño (Arquitectura POO)
 
 El proyecto implementa una arquitectura limpia y separada en paquetes:
 
