@@ -14,7 +14,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
- * Ventana principal: cartas del jugador, marcador, log de batalla y botones.
+ * Ventana principal: cartas del jugador, carta de la máquina, marcador,
+ * log de batalla y botones.
  * Implementa BattleListener para recibir los eventos de la lógica del duelo.
  */
 public class MainFrame extends JFrame implements BattleListener {
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame implements BattleListener {
     private final YgoApiClient apiClient = new YgoApiClient();
 
     private final List<CardPanel> cardPanels = new ArrayList<>();
+    private final CardPanel aiCardPanel = new CardPanel();
     private final JTextArea logArea = new JTextArea(10, 40);
     private final JLabel scoreLabel = new JLabel("Jugador 0 - 0 Máquina", SwingConstants.CENTER);
     private final JButton startButton = new JButton("Iniciar duelo");
@@ -42,6 +44,7 @@ public class MainFrame extends JFrame implements BattleListener {
 
         // Cartas del jugador (centro)
         JPanel cardsRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        cardsRow.setBorder(BorderFactory.createTitledBorder("Tus cartas"));
         for (int i = 0; i < 3; i++) {
             CardPanel panel = new CardPanel();
             cardPanels.add(panel);
@@ -54,6 +57,12 @@ public class MainFrame extends JFrame implements BattleListener {
             });
         }
         add(cardsRow, BorderLayout.CENTER);
+
+        // Carta jugada por la máquina (derecha)
+        JPanel aiColumn = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
+        aiColumn.setBorder(BorderFactory.createTitledBorder("Carta de la máquina"));
+        aiColumn.add(aiCardPanel);
+        add(aiColumn, BorderLayout.EAST);
 
         // Log desplazable + botones (abajo)
         logArea.setEditable(false);
@@ -95,6 +104,11 @@ public class MainFrame extends JFrame implements BattleListener {
         chooseButton.setEnabled(false);
         selectedPanel = null;
         logArea.setText("");
+
+        // Limpia las cartas del duelo anterior
+        for (CardPanel p : cardPanels) p.clear();
+        aiCardPanel.clear();
+
         log("Cargando cartas desde la API...");
 
         new SwingWorker<List<Card>, String>() {
@@ -155,7 +169,18 @@ public class MainFrame extends JFrame implements BattleListener {
         // Duel elimina la carta de su mazo al jugarla, por eso se busca el índice actual
         int index = duel.getPlayerDeck().indexOf(played.getCard());
         played.setUsed(true);
+
+        // Copia del mazo de la máquina antes de jugar el turno
+        List<Card> aiBefore = new ArrayList<>(duel.getAiDeck());
         duel.playTurn(index);
+
+        // La carta que ya no está en el mazo es la que jugó la máquina
+        for (Card c : aiBefore) {
+            if (!duel.getAiDeck().contains(c)) {
+                aiCardPanel.setCard(c);
+                break;
+            }
+        }
     }
 
     // ------------------------------------------------------------------

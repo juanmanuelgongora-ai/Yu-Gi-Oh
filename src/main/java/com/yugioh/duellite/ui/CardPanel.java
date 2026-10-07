@@ -59,6 +59,17 @@ public class CardPanel extends JPanel {
         if (used) setSelected(false);
     }
 
+
+    public void clear() {
+        card = null;
+        imageLabel.setIcon(null);
+        imageLabel.setText("Sin carta");
+        nameLabel.setText(" ");
+        statsLabel.setText(" ");
+        setUsed(false);
+        setSelected(false);
+    }
+
     private void loadImage(String url) {
         imageLabel.setIcon(null);
         imageLabel.setText("Cargando...");
